@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hi</title>
+
+    <!-- Bootstrap -->
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+</button>
+
+<button type="button" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+</button>
+    <form>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username" />
+        </div>
+        <div class="form-group">
+            <label>Email address</label>
+            <input type="text" class="form-control" name="email" />
+        </div>
+        <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+    <!-- Custom script for this template -->
+    <script>
+      $(function () {
+        $('form').bootstrapValidator({
+  　　　　message: 'This value is not valid',
+          feedbackIcons: {
+　　　　　　　valid: 'glyphicon glyphicon-ok',
+　　　　　　　invalid: 'glyphicon glyphicon-remove',
+　　　　　　　validating: 'glyphicon glyphicon-refresh'
+　　　　　},
+          fields: {
+            username: {
+              message: '用户名验证失败',
+              validators: {
+                notEmpty: {//非空验证
+                  message: '用户名不能为空'
+                },
+                stringLength: {//字符串长度验证
+                  min: 6,
+                  max: 18,
+                  message: '用户名长度必须在6到18位之间'
+                },
+                regexp: {//正则表达式验证
+                  regexp: /^[a-zA-Z0-9_]+$/,
+                  message: '用户名只能包含大写、小写、数字和下划线'
+                }
+              }
+            },
+            email: {
+              validators: {
+                notEmpty: {
+                  message: '邮箱地址不能为空'
+                },
+                emailAddress: {//邮箱地址验证（都不用我们去写邮箱的正则了~~）
+                  message: '邮箱地址格式有误'
+                }
+              }
+            }
+          },
+          submitHandler: function (validator, form, submitButton) {
+            alert("submit");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
