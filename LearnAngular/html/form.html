@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="../js/angular.js/1.3.9/angular.min.js"></script>
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJS 表单</title>
+</head>
+
+<body>
+<h3>AngularJS 表单</h3>
+<div ng-app="myApp1" ng-init="count=0" ng-controller="myCtrl1">
+<p>nAngularJS 表单实例</p>
+	<form action="" novalidate>
+		First Namw:<br>
+		<input type="text" ng-model="user.firstName"><br>
+		Last Namw:<br>
+		<input type="text" ng-model="user.lastName"><br><br>
+		<button ng-click="reset()">RESET</button>
+	</form>
+	<p> form = {{user}} </p>
+	<p> master = {{user}} </p>
+</div>
+
+
+<script>
+var app1 = angular.module('myApp1', []);
+app1.controller('myCtrl1', function($scope){
+	$scope.msater = {firstName: "John", lastName: "Doe"};
+	$scope.reset = function(){
+		$scope.user = angular.copy($scope.msater);
+	}
+	$scope.reset();
+})
+</script>
+</body>
+</html>

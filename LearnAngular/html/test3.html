@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<script src="../js/angular.js/1.3.9/angular.min.js"></script>
+<body>
+<p>
+ng-app 指令<br />
+ng-app 指令定义了 AngularJS 应用程序的 根元素。<br />
+ng-app 指令在网页加载完毕时会自动引导（自动初始化）应用程序。<br />
+稍后您将学习到 ng-app 如何通过一个值（比如 ng-app="myModule"）连接到代码模块。<br />
+ng-init 指令<br />
+ng-init 指令为 AngularJS 应用程序定义了 初始值。<br />
+通常情况下，不使用 ng-init。您将使用一个控制器或模块来代替它。<br />
+稍后您将学习更多有关控制器和模块的知识。<br />
+ng-model 指令<br />
+ng-model 指令 绑定 HTML 元素 到应用程序数据。<br />
+ng-model 指令也可以：<br />
+为应用程序数据提供类型验证（number、email、required）。<br />
+为应用程序数据提供状态（invalid、dirty、touched、error）。<br />
+为 HTML 元素提供 CSS 类。<br />
+绑定 HTML 元素到 HTML 表单。<br />
+ng-repeat 指令<br />
+ng-repeat 指令对于集合中<span style="color:red">（数组中）</span>的每个项会 克隆一次 HTML 元素。<br />
+</p>
+
+<div ng-app="app" ng-init="names=['Jani','Hege','Kai']">
+  <p>使用 ng-repeat 来循环数组</p>
+  <ul>
+    <li ng-repeat="x in names">
+      {{ x }}
+    </li>
+  </ul>
+<div>
+
+<script>
+var app = angular.module('app', []);
+</script>
+</body>
+</html>

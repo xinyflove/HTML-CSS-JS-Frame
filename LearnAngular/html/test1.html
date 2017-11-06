@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<script src="../js/angular.js/1.3.9/angular.min.js"></script>
+<body>
+<p>
+ng-app 指令定义一个 AngularJS 应用程序。<br>
+指令告诉 AngularJS，< div > 元素是 AngularJS 应用程序 的"所有者"。<br>
+ng-model 指令把元素值（比如输入域的值）绑定到应用程序。<br>
+指令把输入域的值绑定到应用程序变量 name。<br>
+ng-bind 指令把应用程序数据绑定到 HTML 视图。<br>
+指令把应用程序变量 name 绑定到某个段落的 innerHTML。<br>
+ng-init 指令初始化 AngularJS 应用程序变量。<br>
+</p>
+<div ng-app="myApp" ng-controller="myCtrl" ng-init="initName='小峰'">
+<span ng-bind="initName"></span>
+名: <input type="text" ng-model="firstName"><br>
+姓: <input type="text" ng-model="lastName"><br>
+<p ng-bind="firstName"></p>
+<br>
+姓名: {{firstName + " " + lastName}}
+
+</div>
+
+<script>
+// AngularJS 模块定义应用: AngularJS 模块
+var app = angular.module('myApp', []);
+// AngularJS 控制器控制应用: AngularJS 控制器
+app.controller('myCtrl', function($scope) {
+    $scope.firstName= "John";
+    $scope.lastName= "Doe";
+});
+</script>
+</body>
+</html>
