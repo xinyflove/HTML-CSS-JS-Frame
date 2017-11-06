@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Nested Tabs - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+</head>
+<body>
+	
+	<div class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:700px;height:250px">
+    
+		<div title="Ajax" data-options="href:'_content.html',closable:true" style="padding:10px"></div>
+        
+		<div title="DataGrid" data-options="closable:true" style="padding:10px">
+			<table class="easyui-datagrid" data-options="fit:true,singleSelect:true,rownumbers:true">
+				<thead>
+					<tr>
+						<th data-options="field:'f1',width:10%">序号</th>
+						<th data-options="field:'f2',width:50%">班组名称</th>
+						<th data-options="field:'f3',width:40%">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>01</td>
+						<td>班组1</td>
+						<td><a href="#">修改</a>|<a href="#">删除</a></td>
+					</tr>
+					<tr>
+						<td>02</td>
+						<td>班组2</td>
+						<td><a href="#">修改</a>|<a href="#">删除</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>
