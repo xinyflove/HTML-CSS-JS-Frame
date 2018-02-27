@@ -1,0 +1,93 @@
+<div id="modal-webuploader" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="webuploader" aria-describedby="单张图片上传">
+	<div class="modal-dialog" role="document" aria-hidden="true" style="width:660px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				<ul class="nav nav-pills" role="tablist">
+					<li id="li_upload" class="active" role="presentation">
+						<a href="#upload" aria-controls="upload" role="tab" data-toggle="tab" onclick="$('#select').hide();">
+							上传图片
+						</a>
+					</li>
+					<li id="li_network" class="" role="presentation">
+						<a href="#network" aria-controls="network" role="tab" data-toggle="tab" onclick="$('#select').hide();">
+							提取网络图片
+						</a>
+					</li>
+					<li id="li_history_image" class="" role="presentation">
+						<a href="#history_image" aria-controls="history_image" role="tab" data-toggle="tab" onclick="$('#select').show();">
+							浏览图片
+						</a>
+					</li>
+					<li id="li_history_audio" class="hide" role="presentation">
+						<a href="#history_audio" aria-controls="history_audio" role="tab" data-toggle="tab" onclick="$('#select').hide();">
+							浏览音频
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div id="select" style="display: none;margin:10px 0 -10px 15px;padding-left:7px;">
+				<div id="select-year" style="margin-bottom:10px;">
+					<div class="btn-group">
+						<a href="javascript:;" data-id="0" data-type="year" class="btn btn-default btn-info btn-select">不限</a>
+						<a href="javascript:;" data-id="2016" data-type="year" class="btn btn-default btn-select">2016年</a>
+						<a href="javascript:;" data-id="2015" data-type="year" class="btn btn-default btn-select">2015年</a>
+						<a href="javascript:;" data-id="2014" data-type="year" class="btn btn-default btn-select">2014年</a>
+						<a href="javascript:;" data-id="2013" data-type="year" class="btn btn-default btn-select">2013年</a>
+					</div>
+				</div>
+				<div id="select-month">
+					<div class="btn-group">
+						<a href="javascript:;" data-id="0" data-type="month" class="btn btn-default btn-info btn-select">不限</a>
+						<a href="javascript:;" data-id="1" data-type="month" class="btn btn-default btn-select">1</a>
+						<a href="javascript:;" data-id="2" data-type="month" class="btn btn-default btn-select">2</a>
+						<a href="javascript:;" data-id="3" data-type="month" class="btn btn-default btn-select">3</a>
+						<a href="javascript:;" data-id="4" data-type="month" class="btn btn-default btn-select">4</a>
+						<a href="javascript:;" data-id="5" data-type="month" class="btn btn-default btn-select">5</a>
+						<a href="javascript:;" data-id="6" data-type="month" class="btn btn-default btn-select">6</a>
+						<a href="javascript:;" data-id="7" data-type="month" class="btn btn-default btn-select">7</a>
+						<a href="javascript:;" data-id="8" data-type="month" class="btn btn-default btn-select">8</a>
+						<a href="javascript:;" data-id="9" data-type="month" class="btn btn-default btn-select">9</a>
+						<a href="javascript:;" data-id="10" data-type="month" class="btn btn-default btn-select">10</a>
+						<a href="javascript:;" data-id="11" data-type="month" class="btn btn-default btn-select">11</a>
+						<a href="javascript:;" data-id="12" data-type="month" class="btn btn-default btn-select">12</a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body tab-conten">
+				<div role="tabpanel" class="tab-pane upload active" id="upload">
+					<div id="uploader" class="uploader">
+						<div class="queueList">
+							<div id="dndArea" class="placeholder">
+								<div id="filePicker" class="webuploader-container"></div>
+								<p id="">或将照片拖到这里</p>
+							</div>
+						</div>
+						<div class="statusBar">
+							<div class="infowrap">
+								<div class="progress" style="display: none;">
+									<span class="text">0%</span>
+									<span class="percentage" style="width: 0%;"></span>
+								</div>
+								<div class="info">共0张（0B），已上传0张</div>
+								<div class="accept"></div>
+							</div>
+							<div class="btns">
+								<div class="uploadBtn btn btn-primary state-pedding" style="margin-top: 4px;">确定使用</div>
+								<div class="modal-button-upload" style="float: right; margin-left: 5px;">
+									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

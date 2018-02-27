@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Webuploader Demo</title>
+	<!-- 引入css开始 -->
+	<!-- 引入Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入ont-awesome -->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+	<!-- 引入webuploader -->
+	<link href="webuploader/webuploader.css" rel="stylesheet">
+	<!-- 引入自定义css -->
+	<link href="css/style.css" rel="stylesheet">
+	<!-- 引入css结束 -->
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9 col-xs-12">
+				<div class="input-group ">
+					<input type="text" name="thumb" value="" class="form-control" autocomplete="off">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button" onclick="showImageDialog(this);">选择图片</button>
+					</span>
+				</div>
+				<div class="input-group " style="margin-top:5px;">
+					<img src="images/nopic.jpg" onerror="this.src='images/nopic.jpg'; this.title='图片未找到.'" class="img-responsive img-thumbnail" width="150">
+					<em class="close" style="position:absolute; top: 0px; right: -14px;" title="删除这张图片" onclick="deleteImage(this)">×</em>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	
+	<div id="modal-webuploader" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="webuploader" aria-describedby="单张图片上传">
+		<div class="modal-dialog" role="document" aria-hidden="true" style="width:660px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					<ul class="nav nav-pills" role="tablist">
+						<li id="li_upload" class="active" role="presentation">
+							<a href="#upload" aria-controls="upload" role="tab" data-toggle="tab" onclick="$('#select').hide();">
+								上传图片
+							</a>
+						</li>
+						<li id="li_network" class="" role="presentation">
+							<a href="#network" aria-controls="network" role="tab" data-toggle="tab" onclick="$('#select').hide();">
+								提取网络图片
+							</a>
+						</li>
+						<li id="li_history_image" class="" role="presentation">
+							<a href="#history_image" aria-controls="history_image" role="tab" data-toggle="tab" onclick="$('#select').show();">
+								浏览图片
+							</a>
+						</li>
+						<li id="li_history_audio" class="hide" role="presentation">
+							<a href="#history_audio" aria-controls="history_audio" role="tab" data-toggle="tab" onclick="$('#select').hide();">
+								浏览音频
+							</a>
+						</li>
+					</ul>
+				</div>
+	
+				<div id="select" style="display: none;margin:10px 0 -10px 15px;padding-left:7px;">
+					<div id="select-year" style="margin-bottom:10px;">
+						<div class="btn-group">
+							<a href="javascript:;" data-id="0" data-type="year" class="btn btn-default btn-info btn-select">不限</a>
+							<a href="javascript:;" data-id="2016" data-type="year" class="btn btn-default btn-select">2016年</a>
+							<a href="javascript:;" data-id="2015" data-type="year" class="btn btn-default btn-select">2015年</a>
+							<a href="javascript:;" data-id="2014" data-type="year" class="btn btn-default btn-select">2014年</a>
+							<a href="javascript:;" data-id="2013" data-type="year" class="btn btn-default btn-select">2013年</a>
+						</div>
+					</div>
+					<div id="select-month">
+						<div class="btn-group">
+							<a href="javascript:;" data-id="0" data-type="month" class="btn btn-default btn-info btn-select">不限</a>
+							<a href="javascript:;" data-id="1" data-type="month" class="btn btn-default btn-select">1</a>
+							<a href="javascript:;" data-id="2" data-type="month" class="btn btn-default btn-select">2</a>
+							<a href="javascript:;" data-id="3" data-type="month" class="btn btn-default btn-select">3</a>
+							<a href="javascript:;" data-id="4" data-type="month" class="btn btn-default btn-select">4</a>
+							<a href="javascript:;" data-id="5" data-type="month" class="btn btn-default btn-select">5</a>
+							<a href="javascript:;" data-id="6" data-type="month" class="btn btn-default btn-select">6</a>
+							<a href="javascript:;" data-id="7" data-type="month" class="btn btn-default btn-select">7</a>
+							<a href="javascript:;" data-id="8" data-type="month" class="btn btn-default btn-select">8</a>
+							<a href="javascript:;" data-id="9" data-type="month" class="btn btn-default btn-select">9</a>
+							<a href="javascript:;" data-id="10" data-type="month" class="btn btn-default btn-select">10</a>
+							<a href="javascript:;" data-id="11" data-type="month" class="btn btn-default btn-select">11</a>
+							<a href="javascript:;" data-id="12" data-type="month" class="btn btn-default btn-select">12</a>
+						</div>
+					</div>
+				</div>
+				<div class="modal-body tab-content">
+					
+					<div role="tabpanel" class="tab-pane upload active" id="upload">
+						<div id="uploader" class="uploader">
+							<div class="queueList">
+								<div id="dndArea" class="placeholder">
+									<div id="filePicker" class="webuploader-container"></div>
+									<p id="">或将照片拖到这里</p>
+								</div>
+							</div>
+							<div class="statusBar">
+								<div class="infowrap">
+									<div class="progress" style="display: none;">
+										<span class="text">0%</span>
+										<span class="percentage" style="width: 0%;"></span>
+									</div>
+									<div class="info">共0张（0B），已上传0张</div>
+									<div class="accept"></div>
+								</div>
+								<div class="btns">
+									<div class="uploadBtn btn btn-primary state-pedding" style="margin-top: 4px;">确定使用</div>
+									<div class="modal-button-upload" style="float: right; margin-left: 5px;">
+										<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div role="tabpanel" class="tab-pane network" id="network">
+						<div style="margin-top: 10px;">
+							<form>
+								<div class="form-group">
+									<input type="url" class="form-control" id="networkurl" placeholder="请输入网络图片地址">
+									<input type="hidden" name="network_attachment" value="">
+									<div id="network-img" class="network-img" style="background-image:url('images/nopic.jpg'))">
+										<span class="network-img-sizeinfo" id="network-img-sizeinfo"></span>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary">确认</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+					
+					<div role="tabpanel" class="tab-pane history" id="history_image">
+						<div class="history-content" style="height: 310px; text-align: center;">
+							<ul class="img-list clearfix">
+					
+								<li class="img-item" attachid="2598" title="b.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/06/SI9VU959a9nAWsF5xjrrinxpAS5xdt.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2598">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2597" title="qdgdb.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/06/hw1loLOrc8R5QQBrBMYMYRfR8c1oWB.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2597">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2596" title="b.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/06/n31R773412h2lLox5ocMX1r1xxh53x.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2596">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2595" title="qdgdb.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/06/z9eRWrBIVE4iqv9Ttq44tetezrZIZW.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2595">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2594" title="b.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/06/hlXwl5Q25rLQ4QZ59UQ30BW3LrWz4z.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2594">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2593" title="index-fl02.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/03/AO3Co43iOoDdiF51fZwuF5uGDT4WUi.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2593">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2592" title="index-fl01.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/03/EefSWKutB8i8wwf9MUMi2iuTQQe2K2.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2592">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2591" title="56f0a04aN041b362c.png!q70.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/03/q39oLeV89849o8i8V8oM4MxLX888NM.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2591">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2590" title="c.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/02/pETH1DIME88hq48r78zIzD17rAlm11.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2590">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2589" title="b.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/02/JE6AZttGtgtFyg7ha4Yy10t1yw4o16.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2589">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2588" title="578738d1N00bcde3e.jpg!q70.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/01/zBapZ3hbqUMaj9MC3huAq9nA23iJi6.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2588">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2587" title="578738d7Nb1d581ab.jpg!q70.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/01/qtB3b77s5Ssfd85Sf8c6f8BS252Dd2.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2587">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2586" title="iphonese.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/01/IK7ox7LAvH73Ekvo7aHJV77AlkcKk7.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2586">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2585" title="56f0a04aN041b362c.png!q70.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2017/01/otIlYGXWORU9duWrdsZrTVxg7yZrdz.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2585">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2584" title="装修中.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/12/CmzgtDEwISmMdzwmC9W8I8QJuwGuju.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2584">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2583" title="banaer1.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/12/t5OjPZJC2cZ965GcB9onMUTK6O5mG9.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2583">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2582" title="57ea1b7bN9fa8dc91.jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/12/uM6dKoy8OWYJ766o8Wmg7G6OoY8f66.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2582">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2572" title="新商城商品图2.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/CS7NYt7U3DKD9H0NXdGAs2N0199X18.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2572">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2571" title="新商城商品图1.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/YyD2dU9293ADS0NdD90SA3DA1DaDss.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2571">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2570" title="新商城商品图3.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/AMa18VxvYXzQa88eYWYlvMxVYXNlOc.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2570">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2569" title="新商城商品图2.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/Y1G227mgE810D9Zz202x287UT990de.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2569">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2565" title="新商城分类5.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/ADy422fD6Yvf2wVCGQ2586456VGh3Y.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2565">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2564" title="新商城分类4.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/IzNvX1J3Vh13j6XJ3XHZk1nZhjAHa3.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2564">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2563" title="新商城分类3.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/llJklLblXPBJ5MJ5L1KqN1qmxUlk4Q.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2563">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2562" title="新商城分类2.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/tvXVV93mo99E9zATO919vvO9mdEOvX.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2562">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2561" title="新商城分类1.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/uvnvrKCvNvz6yRvlvnNG6HzHivVnym.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2561">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2559" title="新商城logo103.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/XvP6F9fT7x9FlEDPFPVgx479Lc2LG2.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2559">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2550" title="正方 (3).jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/Wz5XB33iE1e44VNQ43XEQxZ1ii3y62.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2550">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2549" title="正方 (4).jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/TnCA64oQAA6pAWWAA5CQ8c5jaxW4Za.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2549">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2548" title="正方 (1).png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/xCG3uGacog8aZozgqqOdALQOGAoE33.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2548">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2547" title="正方 (1).jpg">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/NBznBg476uR864jNC4GCMPY4PYpPrC.jpg');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2547">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+								<li class="img-item" attachid="2545" title="新商城Logo60-2.png">
+									<div class="img-container" style="background-image: url('http://wemall.cc/attachment/images/56/2016/08/bBF0smMzHKSF50x7T5BtqbX9TtMm5F.png');">
+										<div class="select-status"><span></span></div>
+									</div>
+									<div class="btnClose" data-id="2545">
+										<a href=""><i class="fa fa-times"></i></a>
+									</div>
+								</li>
+					
+							</ul>
+						</div>
+						<div class="modal-footer">
+							<div style="float: left;">
+								<nav id="image-list-pager">
+									<div>
+										<ul class="pagination pagination-centered">
+											<li class="active">
+												<a href="javascript:;">1</a>
+											</li>
+											<li>
+												<a href="javascript:;" page="2">2</a>
+											</li>
+											<li>
+												<a href="javascript:;" page="2" class="pager-nav">下一页»</a>
+											</li>
+											<li>
+												<a href="javascript:;" page="2" class="pager-nav">尾页</a>
+											</li>
+										</ul>
+									</div>
+								</nav>
+							</div>
+							<div style="float: right;">
+								<button style="display:none;" type="button" class="btn btn-primary">确认</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	
+	<script type="text/javascript">
+		// 添加全局站点信息
+		var BASE_URL = 'webuploader';
+	</script>
+	<!-- 引入js开始  -->
+	<!-- 引入jquery -->
+	<script type="text/javascript" src="jquery-v1.10.2.js"></script>
+	<!-- 引入Bootstrap -->
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
+		
+	</script>
+	<!-- 引入webuploader-->
+	<script type="text/javascript" src="webuploader/webuploader.js"></script>
+	<!-- 引入layer -->
+	<script type="text/javascript" src="layer/layer.js"></script>
+	<!-- 引入自定义js -->
+	<script type="text/javascript" src="js/script.js"></script>
+	<!-- 引入js结束 -->
+</body>
+</html>
